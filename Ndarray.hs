@@ -52,6 +52,6 @@ module Ndarray where
         print (getLen t)
         print (getData t)
         print (getShape t)
-        print  (getStride t)
+        print (getStride t)
 
     
