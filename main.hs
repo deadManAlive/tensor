@@ -7,6 +7,5 @@ main = do
         case m of
             Nothing -> print "Failed in generating tensor"
             Just t -> do
-                print (getLen t)
+                printTensor t
                 print (indexToOffset t index)
-                print (getItem t index)

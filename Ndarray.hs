@@ -1,19 +1,21 @@
 module Ndarray where
 
     -- generic n-dimensional array data structure with data, shape, and stride information
-    data Tensor a = Tensor { arr :: [a]
+    data Tensor a where
+        Tensor :: Num a => { arr :: [a]
                            , shape :: [Int]
                            , stride :: [Int]
-                           }
+                           } -> Tensor a
+
     -- constructors and public methods
-    mkTensor :: a -> [Int] -> Tensor a
+    mkTensor :: Num a => a -> [Int] -> Tensor a
     mkTensor elm sh = 
         Tensor (replicate (product sh) elm) sh (shapeToStride sh)
 
-    mkZeros :: (Num a) => [Int] -> Tensor a
+    mkZeros :: Num a => [Int] -> Tensor a
     mkZeros sh = mkTensor 0 sh
 
-    mkFromList :: [a] -> [Int] -> Maybe (Tensor a)
+    mkFromList :: Num a => [a] -> [Int] -> Maybe (Tensor a)
     mkFromList arr sh
         | length arr /= product sh = Nothing
         | otherwise = Just (Tensor arr sh (shapeToStride sh))
