@@ -7,6 +7,7 @@ module Ndarray where
                            , tstride :: [Int]
                            } -> Tensor a
 
+    deriving instance Show a => Show (Tensor a)
     -- constructors and public methods
     mkTensor :: Num a => a -> [Int] -> Tensor a
     mkTensor elm sh = 
@@ -40,8 +41,8 @@ module Ndarray where
     indexToOffset :: Tensor a -> [Int] -> Int
     indexToOffset t idx = sum (zipWith (*) idx (tstride t))
 
-    printTensor :: (Show a) => Tensor a -> IO ()
-    printTensor t = do
+    printTensorDetail :: (Show a) => Tensor a -> IO ()
+    printTensorDetail t = do
         print (tlen t)
         print (tarr t)
         print (tshape t)
