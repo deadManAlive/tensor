@@ -1,6 +1,6 @@
 HC := ghc
 BUILDIR := build
-MAIN := main
+MAIN := Main
 SRC := $(wildcard ./*.hs)
 
 build: $(SRC)
