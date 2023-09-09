@@ -13,7 +13,7 @@ module Ndarray where
         Tensor (replicate (product sh) elm) sh (shapeToStride sh)
 
     mkZeros :: Num a => [Int] -> Tensor a
-    mkZeros sh = mkTensor 0 sh
+    mkZeros = mkTensor 0
 
     mkFromList :: Num a => [a] -> [Int] -> Maybe (Tensor a)
     mkFromList arr sh
@@ -23,12 +23,12 @@ module Ndarray where
     getItem:: Tensor a -> [Int] -> Maybe a
     getItem t idx
         | offset >= tlen t = Nothing
-        | otherwise = Just ((tarr t) !! offset)
+        | otherwise = Just (tarr t !! offset)
         where
             offset = sum (zipWith (*) idx (tstride t))
 
     -- primitive methods (for debug & internal use)
-    -- TODO: export only public functions above
+    -- TODO: export only public functions above (?)
     tlen :: Tensor a -> Int
     tlen (Tensor arr _ _) = length arr
 
